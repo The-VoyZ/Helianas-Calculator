@@ -26,7 +26,22 @@ def usr_input():
     #print(components,type)
     return type,components
     
+def essence_harvesting():
+    harvest_essence = input("Do you want to Harvest the Essence of the Monster? Y/N ")
+    if harvest_essence == "Y" or "y":
+        monster_Cr = input("CR of the Monster: ")
+        monster_Cr = monster_Cr.lstrip("CR of the Monster: ")
+        if monster_Cr.isnumeric() == False:
+            return print("Is not a Number please input a Number!")
+        else:
+            #Check for Essence Quality
+            if monster_Cr <= 12:
+                pass
+    else:
+        pass
 
+    
+    
 class Calculator():
     
     def __init__(self):
@@ -97,6 +112,7 @@ class Calculator():
                 self.DC_calc = self.DC_calc + str(self.type_dict[single_comp[i]]) + "+"
                 
                 
+                
             else:
                 continue
         
@@ -109,8 +125,9 @@ class GUInput():
 
 
 if __name__ == "__main__":
-    cal = Calculator()
-    cal.typ_check()
-    cal.calculation()
+    essence_harvesting()
+    #cal = Calculator()
+    #cal.typ_check()
+    #cal.calculation()
     #print(tom)
     
