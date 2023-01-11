@@ -14,24 +14,39 @@ monstrosity = {"antenna":5,"eye":5,"flesh":5,"phial of blood":5,"antler":10,"bea
 ooze = {"phial of acid":5,"phial of mucus":10,"vesicle":15,"membrane":20}
 plant = {"phial of sap":5,"tuber":5,"bundle of roots":10,"phial of wax":10,"pouch of hyphae":10,"pouch of leaves":10,"poison gland":15,"pouch of pollen":15,"pouch of spores":15,"bark":20,"fungal membrane":20}
 undead = {"eye":5,"bone":5,"phial of congealed blood":5,"marrow":10,"pouch of teeth":10,"rancid fat":10,"ethereal ichor":15,"undying flesh":15,"undying heart":20}
-    
+
 #UserInput of Type and Components
-type = ""
+monster_type = ""
 components = ""
 def usr_input():
-    type = input("Type: ")
+    monster_type = input("Type: ")
     components = input("Conponents: ")
-    type = type.replace("Type:","")
+    monster_type = monster_type.replace("Type:","")
     components = components.replace("Conponents:","")
     #print(components,type)
     return type,components
     
+def essence_harvesting():
+    harvest_essence = input("Do you want to Harvest the Essence of the Monster? Y/N ")
+    if harvest_essence == "Y" or "y":
+        monster_Cr = input("CR of the Monster: ")
+        monster_Cr = monster_Cr.lstrip("CR of the Monster: ")
+        if monster_Cr.isnumeric() == False:
+            return print("Is not a Number please input a Number!")
+        else:
+            #Check for Essence Quality
+            if monster_Cr <= 12:
+                pass
+    else:
+        pass
 
+    
+    
 class Calculator():
     
     def __init__(self):
-        type,components = usr_input()
-        self.type = type
+        monster_type,components = usr_input()
+        self.monster_type = monster_type
         self.components = components
         self.type_dict = {}
         self.comp_list = "Component List: "
@@ -39,47 +54,47 @@ class Calculator():
         self.DC_calc = "DC Calculation: "
     #Checks if inputed type is in the Selection and Selects the Dictionary for further processing
     def typ_check(self):
-        print(type,components)
-        if self.type == "Aberation" or "aberation":
+        print(monster_type,components)
+        if self.monster_type == "Aberation" or "aberation":
             self.type_dict = aberation
             print(self.type_dict) 
-        elif self.type == "beast" or "Beast":
+        elif self.monster_type == "beast" or "Beast":
             self.type_dict = beast
             print(self.type_dict) 
-        elif self.type == "celestial" or "Celestial":
+        elif self.monster_type == "celestial" or "Celestial":
             self.type_dict = celestial
             print(self.type_dict) 
-        elif self.type == "construct" or "Celestial":
+        elif self.monster_type == "construct" or "Celestial":
             self.type_dict = construct
             print(self.type_dict) 
-        elif self.type == "dragon"or"Dragon":
+        elif self.monster_type == "dragon"or"Dragon":
             self.type_dict = dragon
             print(self.type_dict)    
-        elif self.type == "elemental"or"Elemental":
+        elif self.monster_type == "elemental"or"Elemental":
             self.type_dict = elemental
             print(self.type_dict) 
-        elif self.type == "fey"or"Fey":
+        elif self.monster_type == "fey"or"Fey":
             self.type_dict = fey
             print(self.type_dict) 
-        elif self.type == "fiend"or"Fiend":
+        elif self.monster_type == "fiend"or"Fiend":
             self.type_dict = fiend
             print(self.type_dict)
-        elif self.type == "giant"or"Giant":
+        elif self.monster_type == "giant"or"Giant":
             self.type_dict = giant
             print(self.type_dict)
-        elif self.type == "humanoid"or"Humanoid":
+        elif self.monster_type == "humanoid"or"Humanoid":
             self.type_dict = humanoid
             print(self.type_dict)
-        elif self.type == "monstrosity"or"Monstrosity":
+        elif self.monster_type == "monstrosity"or"Monstrosity":
             self.type_dict = monstrosity
             print(self.type_dict)
-        elif self.type == "ooze"or"Ooze":
+        elif self.monster_type == "ooze"or"Ooze":
             self.type_dict = ooze
             print(self.type_dict)
-        elif self.type == "plant"or"Plant":
+        elif self.monster_type == "plant"or"Plant":
             self.type_dict = plant
             print(self.type_dict)
-        elif self.type == "undead"or"Undead":
+        elif self.monster_type == "undead"or"Undead":
             self.type_dict = undead
             print(self.type_dict)
         else:
@@ -97,10 +112,11 @@ class Calculator():
                 self.DC_calc = self.DC_calc + str(self.type_dict[single_comp[i]]) + "+"
                 
                 
+                
             else:
                 continue
         
-        return print("Monster Type : "+str(self.type.capitalize())+"\n" +"DC: " + str(self.DC) + "\n" + str(self.DC_calc[0:-1]) + "\n" + str(self.comp_list[0:-1]) + "\n")
+        return print("Monster Type : "+str(self.monster_type.capitalize())+"\n" +"DC: " + str(self.DC) + "\n" + str(self.DC_calc[0:-1]) + "\n" + str(self.comp_list[0:-1]) + "\n")
         
             
 class GUInput():
@@ -109,8 +125,8 @@ class GUInput():
 
 
 if __name__ == "__main__":
+    essence_harvesting()
     cal = Calculator()
     cal.typ_check()
     cal.calculation()
-    #print(tom)
     
