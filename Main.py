@@ -27,6 +27,9 @@ def usr_input():
     return type,components
     
 def essence_harvesting():
+    temp_essence = essence.items()
+    monster_essence = ""
+    monster_essence_dc = ""
     harvest_essence = input("Do you want to Harvest the Essence of the Monster? Y/N ")
     if harvest_essence == "Y" or "y":
         monster_Cr = input("CR of the Monster: ")
@@ -34,9 +37,29 @@ def essence_harvesting():
         if monster_Cr.isnumeric() == False:
             return print("Is not a Number please input a Number!")
         else:
+            monster_Cr = int(monster_Cr)
             #Check for Essence Quality
-            if monster_Cr <= 12:
-                pass
+            for key , value in temp_essence:
+                if monster_Cr <=6  and monster_Cr >= 3  and key == "Frail essence":
+                    monster_essence = key
+                    monster_essence_dc = value
+                    print(monster_essence +" "+ str(monster_essence_dc))
+                elif monster_Cr <=11  and monster_Cr >= 7  and key == "Robust essence":
+                    monster_essence = key
+                    monster_essence_dc = value
+                    print(monster_essence +" "+ str(monster_essence_dc))
+                elif monster_Cr <=17  and monster_Cr >= 12  and key == "Potent essence":
+                    monster_essence = key
+                    monster_essence_dc = value
+                    print(monster_essence +" "+ str(monster_essence_dc))
+                elif monster_Cr <=24  and monster_Cr >= 18  and key == "Mythic essence":
+                    monster_essence = key
+                    monster_essence_dc = value
+                    print(monster_essence +" "+ str(monster_essence_dc))
+                elif monster_Cr >= 25  and key == "Deific essence":
+                    monster_essence = key
+                    monster_essence_dc = value
+                    print(monster_essence +" "+ str(monster_essence_dc))
     else:
         pass
 
@@ -126,7 +149,7 @@ class GUInput():
 
 if __name__ == "__main__":
     essence_harvesting()
-    cal = Calculator()
-    cal.typ_check()
-    cal.calculation()
-    
+    #cal = Calculator()
+    #cal.typ_check()
+    #cal.calculation()
+    #
