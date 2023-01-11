@@ -24,7 +24,7 @@ components = {}
 monster_CR = 0
 monster_components = ""
 
-class UserInput():
+class HarvestCalculator():
     
     
     def __init__(self) -> None:
@@ -152,26 +152,14 @@ class UserInput():
                     self.DC_calc = self.DC_calc + str(self.components[self.monster_components[i]]) + "+"
                 
         return print("\n" + "Monster Type : "+ str(self.monster_type).capitalize()+"\n" +"DC: " + str(self.DC) + "\n" + str(self.DC_calc[0:-1]) + "\n" + str(self.comp_list[0:-2]) + "\n")
-            
-        
-
-
-class Monster ():
-    
-    def __init__(self,monster_type,monster_CR,components) -> None:
-        self.monster_type = monster_type
-        self.monster_CR = monster_CR
-        self.components = components
-        
-
-
 
 
 
 
 if __name__ == "__main__":
-    a = UserInput()
+    a = HarvestCalculator()
     a.usr_input()
+    
     
     
    
