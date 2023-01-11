@@ -31,14 +31,13 @@ class Calculator():
     
     def __init__(self):
         type,components = usr_input()
-        #type,components = inp
         self.type = type
         self.components = components
         self.type_dict = {}
         self.comp_list = "Component List: "
         self.DC = 0
         self.DC_calc = "DC Calculation: "
-    
+    #Checks if inputed type is in the Selection and Selects the Dictionary for further processing
     def typ_check(self):
         print(type,components)
         if self.type == "Aberation" or "aberation":
@@ -85,7 +84,7 @@ class Calculator():
             print(self.type_dict)
         else:
             return "No Type Found"
-        
+    #Calculates the DC and outputs the DC, DC Calculation and The List of Selected Items.     
     def calculation(self):
         print(self.components)
         single_comp = []
@@ -104,14 +103,14 @@ class Calculator():
         return print("Monster Type : "+str(self.type.capitalize())+"\n" +"DC: " + str(self.DC) + "\n" + str(self.DC_calc[0:-1]) + "\n" + str(self.comp_list[0:-1]) + "\n")
         
             
-class UserInput():
+class GUInput():
     def __init__(self) -> None:
         pass
 
 
 if __name__ == "__main__":
-    tom = Calculator()
-    tom.typ_check()
-    tom.calculation()
+    cal = Calculator()
+    cal.typ_check()
+    cal.calculation()
     #print(tom)
     
