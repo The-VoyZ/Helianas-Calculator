@@ -14,7 +14,7 @@ monstrosity = {"antenna":5,"eye":5,"flesh":5,"phial of blood":5,"antler":10,"bea
 ooze = {"phial of acid":5,"phial of mucus":10,"vesicle":15,"membrane":20}
 plant = {"phial of sap":5,"tuber":5,"bundle of roots":10,"phial of wax":10,"pouch of hyphae":10,"pouch of leaves":10,"poison gland":15,"pouch of pollen":15,"pouch of spores":15,"bark":20,"fungal membrane":20}
 undead = {"eye":5,"bone":5,"phial of congealed blood":5,"marrow":10,"pouch of teeth":10,"rancid fat":10,"ethereal ichor":15,"undying flesh":15,"undying heart":20}
-    
+
 #UserInput of Type and Components
 monster_type = ""
 components = ""
@@ -45,7 +45,7 @@ def essence_harvesting():
 class Calculator():
     
     def __init__(self):
-        type,components = usr_input()
+        monster_type,components = usr_input()
         self.monster_type = monster_type
         self.components = components
         self.type_dict = {}
@@ -54,7 +54,7 @@ class Calculator():
         self.DC_calc = "DC Calculation: "
     #Checks if inputed type is in the Selection and Selects the Dictionary for further processing
     def typ_check(self):
-        print(type,components)
+        print(monster_type,components)
         if self.monster_type == "Aberation" or "aberation":
             self.type_dict = aberation
             print(self.type_dict) 
@@ -116,7 +116,7 @@ class Calculator():
             else:
                 continue
         
-        return print("Monster Type : "+str(self.type.capitalize())+"\n" +"DC: " + str(self.DC) + "\n" + str(self.DC_calc[0:-1]) + "\n" + str(self.comp_list[0:-1]) + "\n")
+        return print("Monster Type : "+str(self.monster_type.capitalize())+"\n" +"DC: " + str(self.DC) + "\n" + str(self.DC_calc[0:-1]) + "\n" + str(self.comp_list[0:-1]) + "\n")
         
             
 class GUInput():
