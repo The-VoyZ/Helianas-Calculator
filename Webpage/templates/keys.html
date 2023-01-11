@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Key Selection</title>
+</head>
+<body>
+    <h1>Select Keys</h1>
+    <h2>{{selected_dict}}</h2>
+    <form method="post">
+        {% for key in data.keys() %}
+            <input type="checkbox" name="keys" value="{{ key }}"> {{ key }}<br>
+        {% endfor %}
+        <input type="hidden" name="dict" value="{{ selected_dict }}">
+        <input type="submit" value="Calculate Sum" formaction="/sum">
+    </form>
+</body>
+</html>

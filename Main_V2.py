@@ -19,162 +19,160 @@ undead = {"eye":5,"bone":5,"phial of congealed blood":5,"marrow":10,"pouch of te
 type_selection = [aberation,beast,celestial,construct,dragon,elemental,fey,fiend,giant,humanoid,monstrosity,ooze,plant,undead]
 
 #Essence Harvesting Variables: 
-monster_essence = ""
-monster_essence_dc = 0
-essence_harvest = False
-
-#UserInput of Type and Components
 monster_type = ""
-components = ""
-def usr_input():
-    monster_type = input("Type: ")
-    components = input("Conponents: ")
-    monster_type = monster_type.replace("Type:","")
-    components = components.replace("Conponents:","")
-    #print(components,type)
-    return monster_type,components
-    
-def essence_harvesting():
-    harvest_essence = input("Do you want to Harvest the Essence of the Monster? Y/N ")
-    if harvest_essence == "Y" or "y":
-        essence_harvest == True
-        monster_Cr = input("CR of the Monster: ")
-        monster_Cr = monster_Cr.lstrip("CR of the Monster: ")
-        if monster_Cr.isnumeric() == False:
-            return print("Is not a Number please input a Number!")
-        else:
-            monster_Cr = int(monster_Cr)
-            cr_check(monster_Cr)
-    else:
-        essence_harvest == False
-    
-    
-def cr_check(monster_Cr):
-    temp_essence = essence.items()
-    for key, value in temp_essence:
-                if monster_Cr <=6  and monster_Cr >= 3  and key == "Frail essence":
-                    monster_essence = key
-                    monster_essence_dc = value
-                    print(monster_essence +" "+ str(monster_essence_dc))
-                elif monster_Cr <=11  and monster_Cr >= 7  and key == "Robust essence":
-                    monster_essence = key
-                    monster_essence_dc = value
-                    print(monster_essence +" "+ str(monster_essence_dc))
-                elif monster_Cr <=17  and monster_Cr >= 12  and key == "Potent essence":
-                    monster_essence = key
-                    monster_essence_dc = value
-                    print(monster_essence +" "+ str(monster_essence_dc))
-                elif monster_Cr <=24  and monster_Cr >= 18  and key == "Mythic essence":
-                    monster_essence = key
-                    monster_essence_dc = value
-                    print(monster_essence +" "+ str(monster_essence_dc))
-                elif monster_Cr >= 25  and key == "Deific essence":
-                    monster_essence = key
-                    monster_essence_dc = value
-                    print(monster_essence +" "+ str(monster_essence_dc))
+components = {}
+monster_CR = 0
+monster_components = ""
 
+class UserInput():
     
-class Calculator():
     
-    def __init__(self):
-        monster_type,components = usr_input()
+    def __init__(self) -> None:
+        self.essence = essence
         self.monster_type = monster_type
+        self.monster_CR = monster_CR
+        self.monster_components = monster_components
         self.components = components
-        self.esscence_harvest = essence_harvest
         self.type_dict = {}
         self.comp_list = "Component List: "
         self.DC = 0
         self.DC_calc = "DC Calculation: "
-    #Checks if inputed type is in the Selection and Selects the Dictionary for further processing
+        
+        
+    #UserInput:
+    def usr_input(self):
+        self.monster_type = input("Monster Type: ")
+        self.monster_CR = input("Monster CR: ")
+        self.monster_components = input("Monster Conponents: ")
+        self.monster_type = self.monster_type.replace("Type:","")
+        self.monster_CR = self.monster_CR.replace("Monster CR: ","")
+        self.monster_components = self.monster_components.replace("Monster Conponents: ","")
+        self.calculation()
+        return int(self.monster_CR),self.monster_type,self.monster_components
+
+    def calc_essence(self):
+        self.monster_CR = int(self.monster_CR)
+        for k,v in self.essence.items():
+            if self.monster_CR <= 6 and self.monster_CR >= 3 and k == "Frail essence":
+                self.components[k] = v
+                return "Frail essence"
+            elif self.monster_CR <= 11 and self.monster_CR >= 7 and k == "Robust essence":
+                self.components[k] = v
+                return "Robust essence"
+            elif self.monster_CR <= 17 and self.monster_CR >= 12 and k == "Potent essence":
+                self.components[k] = v
+                return "Potent essence"
+            elif self.monster_CR <= 24 and self.monster_CR >= 18 and k == "Mythic essence":
+                self.components[k] = v
+                return "Mythic essence"
+            elif self.monster_CR >= 25 and k == "Deific essence":
+                self.components[k] = v
+                return "Deific essence"
+            #else:
+            #    return None
+            
+             
+    #Replaces input Essence with Key form Essence Dict   
+    def replace_essence (self):
+        self.monster_components = self.monster_components.split(",")
+        for i in range(0,len(self.monster_components)):
+            if self.monster_components[i] == "essence":
+                self.monster_components[i] = self.calc_essence()
+
+    
+    def build_comp_dict(self):
+        self.replace_essence()
+        self.type_dict = self.typ_check()
+        for k ,v in self.type_dict.items():
+            if k in self.monster_components:
+                self.components[k] = v
+            else:
+                continue
+        return self.components
+    
+    def comp_print(self):
+        print(self.components)
+        print(self.monster_components)
+        
+    
+    
+    
     def typ_check(self):
-        print(monster_type,components)
         if self.monster_type == "Aberation" or "aberation":
             self.type_dict = aberation
-            print(self.type_dict) 
+            return self.type_dict 
         elif self.monster_type == "beast" or "Beast":
             self.type_dict = beast
-            print(self.type_dict) 
+            return self.type_dict  
         elif self.monster_type == "celestial" or "Celestial":
             self.type_dict = celestial
-            print(self.type_dict) 
+            return self.type_dict  
         elif self.monster_type == "construct" or "Celestial":
             self.type_dict = construct
-            print(self.type_dict) 
+            return self.type_dict  
         elif self.monster_type == "dragon"or"Dragon":
             self.type_dict = dragon
-            print(self.type_dict)    
+            return self.type_dict     
         elif self.monster_type == "elemental"or"Elemental":
             self.type_dict = elemental
-            print(self.type_dict) 
+            return self.type_dict 
         elif self.monster_type == "fey"or"Fey":
             self.type_dict = fey
-            print(self.type_dict) 
+            return self.type_dict 
         elif self.monster_type == "fiend"or"Fiend":
             self.type_dict = fiend
-            print(self.type_dict)
+            return self.type_dict 
         elif self.monster_type == "giant"or"Giant":
             self.type_dict = giant
-            print(self.type_dict)
+            return self.type_dict 
         elif self.monster_type == "humanoid"or"Humanoid":
             self.type_dict = humanoid
-            print(self.type_dict)
+            return self.type_dict 
         elif self.monster_type == "monstrosity"or"Monstrosity":
             self.type_dict = monstrosity
-            print(self.type_dict)
+            return self.type_dict 
         elif self.monster_type == "ooze"or"Ooze":
             self.type_dict = ooze
-            print(self.type_dict)
+            return self.type_dict 
         elif self.monster_type == "plant"or"Plant":
             self.type_dict = plant
-            print(self.type_dict)
+            return self.type_dict 
         elif self.monster_type == "undead"or"Undead":
             self.type_dict = undead
-            print(self.type_dict)
+            return self.type_dict 
         else:
             return "No Type Found"
-    #Calculates the DC and outputs the DC, DC Calculation and The List of Selected Items.     
+
     def calculation(self):
-        print(self.components)
-        single_comp = []
-        single_comp = self.components.split(",")
-       
-       
-        if self.esscence_harvest == False:
-            for i in range(0,len(single_comp)):
-                #print(single_comp[i])
-                if single_comp[i] in self.type_dict:
-                    self.DC += self.type_dict[single_comp[i]]    
-                    self.comp_list = self.comp_list  + str(single_comp[i]).capitalize()+ ","
-                    self.DC_calc = self.DC_calc + str(self.type_dict[single_comp[i]]) + "+"
-                else:
-                    continue
-            return print("Monster Type : "+ str(self.monster_type).capitalize()+"\n" +"DC: " + str(self.DC) + "\n" + str(self.DC_calc[0:-1]) + "\n" + str(self.comp_list[0:-1]) + "\n")
-        elif self.esscence_harvest == True:
-            single_comp.append(monster_essence)
-            for i in range(0,len(single_comp)):
-                #print(single_comp[i])
-                if single_comp[i] in self.type_dict:
-                    self.DC += self.type_dict[single_comp[i]]    
-                    self.comp_list = self.comp_list  + str(single_comp[i]).capitalize()+ ","
-                    self.DC_calc = self.DC_calc + str(self.type_dict[single_comp[i]]) + "+"
-                elif single_comp[i] in essence:
-                    self.DC += essence[single_comp[i]]
-                    self.comp_list = self.comp_list + str(single_comp[i]).capitalize()+ ","
-                    self.DC_calc = self.DC_calc + str(essence[single_comp[i]]) + "+"
-            return print("Monster Type : "+ str(self.monster_type).capitalize()+"\n" +"DC: " + str(self.DC) + "\n" + str(self.DC_calc[0:-1]) + "\n" + str(self.comp_list[0:-1]) + "\n")
+        self.build_comp_dict()
+        for i in range(0,len(self.monster_components)):
+                if self.monster_components[i] in self.components:
+                    self.DC += self.components[self.monster_components[i]]    
+                    self.comp_list = self.comp_list  + str(self.monster_components[i]).capitalize()+ " , "
+                    self.DC_calc = self.DC_calc + str(self.components[self.monster_components[i]]) + "+"
+                
+        return print("\n" + "Monster Type : "+ str(self.monster_type).capitalize()+"\n" +"DC: " + str(self.DC) + "\n" + str(self.DC_calc[0:-1]) + "\n" + str(self.comp_list[0:-2]) + "\n")
             
         
+
+
+class Monster ():
+    
+    def __init__(self,monster_type,monster_CR,components) -> None:
+        self.monster_type = monster_type
+        self.monster_CR = monster_CR
+        self.components = components
         
-        
-            
-class GUInput():
-    def __init__(self) -> None:
-        pass
+
+
+
+
 
 
 if __name__ == "__main__":
-    essence_harvesting()
-    cal = Calculator()
-    cal.typ_check()
-    cal.calculation()
+    a = UserInput()
+    a.usr_input()
     
+    
+   
+   
