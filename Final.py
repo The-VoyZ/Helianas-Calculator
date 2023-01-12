@@ -1,6 +1,3 @@
-import tkinter as tk
-from tkinter import ttk
-
 #Dicionarys for the unique monster typs
 essence = {"Frail essence":25,"Robust essence":30,"Potent essence":35,"Mythic essence":40,"Deific essence":50}
 aberation = {"antenna":5,"eye":5,"flesh":5,"phial of blood":5,"bone":10,"egg":10,"fat":10,"pouch of claws":10,"pouch of teeth":10,"heart":15,"phial of mucus":15,"liver":15,"stinger":15,"tentacle":15,"brain":20,"chitin":20,"hide":20,"main eye":20}
@@ -34,7 +31,7 @@ def usr_input():
         monster_type = monster_type.replace("Type:","").lower()
         monster_CR = monster_CR.replace("Monster CR: ","")
         monster_components = monster_components.replace("Monster Conponents: ","").lower()
-        
+       
         return int(monster_CR),monster_type,monster_components
 
 
@@ -74,7 +71,7 @@ class HarvestCalculator():
                 self.components[k] = v
                 return "Deific essence"
             #else:
-            #    return None
+            #   return None
             
              
     #Replaces input Essence with Key form Essence Dict   
@@ -115,7 +112,7 @@ class HarvestCalculator():
         elif self.monster_type == "dragon"or"Dragon":
             self.type_dict = dragon
             return self.type_dict     
-        elif self.monster_type == "elemental":
+        elif self.monster_type == "elemental"or"Elemental":
             self.type_dict = elemental
             return self.type_dict 
         elif self.monster_type == "fey"or"Fey":
@@ -147,60 +144,20 @@ class HarvestCalculator():
 
     def calculation(self):
         self.build_comp_dict()
-        for i in range(0,len(self.monster_components)):
-                if self.monster_components[i] in self.components:
-                    self.DC += self.components[self.monster_components[i]]    
-                    self.comp_list = self.comp_list  + str(self.monster_components[i]).capitalize()+ " , "
-                    self.DC_calc = self.DC_calc + str(self.components[self.monster_components[i]]) + "+"
+        self.DC = sum(self.components[item] for item in self.monster_components)
+        self.DC_calc = self.DC_calc + "+".join(str(self.components[item]) for item in self.monster_components)
+        self.comp_list = self.comp_list + ", ".join(self.monster_components).title()
+        
+        
+        
+        
+       # for i in range(0,len(self.monster_components)):
+          #  if self.monster_components[i] in self.components:
+               # self.DC += self.components[self.monster_components[i]]    
+                #self.comp_list = self.comp_list  + str(self.monster_components[i]).capitalize()+ " , "
+                #self.DC_calc = self.DC_calc + str(self.components[self.monster_components[i]]) + "+"
                 
-        return print("\n" + "Monster Type : "+ str(self.monster_type).capitalize()+"\n" +"DC: " + str(self.DC) + "\n" + str(self.DC_calc[0:-1]) + "\n" + str(self.comp_list[0:-2]) + "\n")
-
-##Tkinker UI
-
-def calculate():
-    # Code zur Berechnung des Ergebnisses
-    result = 0
-    for key in selected_keys:
-        result += type_selection[selected_dict][key]
-    output_label.config(text=result)
-
-root = tk.Tk()
-root.title("Helianas Harvesting Calculator")
-
-# Überschrift
-heading_label = tk.Label(root, text="Helianas Harvesting Calculator")
-heading_label.pack()
-
-# Dropdown Menü für Dictionaries
-selected_dict = tk.StringVar(root)
-dict_dropdown = ttk.Combobox(root, textvariable=selected_dict, values=list(type_selection.keys()))
-dict_dropdown.pack()
-
-# Liste für ausgewählte Schlüssel
-selected_keys = []
-key_dropdowns = []
-
-# Funktion zum Erstellen eines neuen Key-Dropdown
-def add_key_dropdown():
-    key_var = tk.StringVar(root)
-    key_dropdown = ttk.Combobox(root, textvariable=key_var, values=list(type_selection[selected_dict.get()].keys()))
-    key_dropdown.pack()
-    key_dropdowns.append(key_var)
-    key_var.trace("w", lambda *args: calculate())
-
-# Button zum Hinzufügen eines neuen Key-Dropdown
-add_key_button = tk.Button(root, text="Add Monster Part", command=add_key_dropdown)
-add_key_button.pack()
-
-# Button zum Berechnen,
-calculate_button = tk.Button(root, text="Calculate", command=calculate)
-calculate_button.pack()
-
-# Ausgabefeld
-output_label = tk.Label(root, text="")
-output_label.pack()
-
-
+        return print("\n" + "Monster Type : "+ str(self.monster_type).capitalize()+"\n" +"DC: " + str(self.DC) + "\n" + str(self.DC_calc)+"\n" + str(self.comp_list)+ "\n")
 
 
 
@@ -208,9 +165,8 @@ output_label.pack()
 if __name__ == "__main__":
     ls = usr_input()
     monster = HarvestCalculator(ls[0],ls[1],ls[2])
-    root.mainloop()
     
-   
+    
     
     
     

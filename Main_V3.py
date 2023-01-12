@@ -28,7 +28,9 @@ def usr_input():
         monster_type = input("Monster Type: ")
         monster_CR = input("Monster CR: ")
         monster_components = input("Monster Conponents: ")
-        monster_type = monster_type.replace("Type:","")
+        
+        #replace
+        monster_type = monster_type.replace("Monster Type:","")
         monster_CR = monster_CR.replace("Monster CR: ","")
         monster_components = monster_components.replace("Monster Conponents: ","")
         
