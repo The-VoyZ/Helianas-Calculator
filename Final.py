@@ -56,7 +56,7 @@ class HarvestCalculator():
     def calc_essence(self):
         self.monster_CR = int(self.monster_CR)
         for k,v in self.essence.items():
-            if self.monster_CR <= 6 and self.monster_CR >= 3 and k == "Frail essence":
+            if self.monster_CR <= 6 and self.monster_CR >= 0 and k == "Frail essence":
                 self.components[k] = v
                 return "Frail essence"
             elif self.monster_CR <= 11 and self.monster_CR >= 7 and k == "Robust essence":
