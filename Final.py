@@ -24,6 +24,7 @@ components = {}
 monster_CR = 0
 monster_components = ""
 
+#User Input
 def usr_input():
         monster_type = input("Monster Type: ")
         monster_CR = input("Monster CR: ")
@@ -79,7 +80,7 @@ class HarvestCalculator():
             if self.monster_components[i] == "essence":
                 self.monster_components[i] = self.calc_essence()
 
-    
+    #Builds a new Dict from the User inputed Components for use in The Calculation
     def build_comp_dict(self):
         self.replace_essence()
         self.type_dict = self.typ_check()
@@ -90,10 +91,11 @@ class HarvestCalculator():
                 continue
         return self.components
     
-        
+    #Selects the right dictionary for the Spesific Monster Typ 
     def typ_check(self):
         return type_selection[str(self.monster_type).lower()]
 
+    #Calculates the Values and Returns it to the Console
     def calculation(self):
         self.build_comp_dict()
         self.DC         = sum(self.components[item] for item in self.monster_components)
@@ -108,11 +110,4 @@ class HarvestCalculator():
 
 if __name__ == "__main__":
     ls = usr_input()
-    monster = HarvestCalculator(ls[0],ls[1],ls[2])
-    
-    
-    
-    
-    
-   
-   
+    monster = HarvestCalculator(ls[0],ls[1],ls[2]) 
