@@ -16,7 +16,7 @@ plant = {"phial of sap":5,"tuber":5,"bundle of roots":10,"phial of wax":10,"pouc
 undead = {"eye":5,"bone":5,"phial of congealed blood":5,"marrow":10,"pouch of teeth":10,"rancid fat":10,"ethereal ichor":15,"undying flesh":15,"undying heart":20}
 
 #Dropdown Menue for Type Selection
-type_selection = {"Aberation":aberation,"Beast":beast,"Celestial":celestial,"Construct":construct,"Dragon":dragon,"Elemental":elemental,"Fey":fey,"Fiend":fiend,"Giant":giant,"Humanoid":humanoid,"Monstrosity":monstrosity,"Ooze":ooze,"Plant":plant,"Undead":undead}
+type_selection = {"aberation":aberation,"beast":beast,"celestial":celestial,"construct":construct,"dragon":dragon,"elemental":elemental,"fey":fey,"fiend":fiend,"giant":giant,"humanoid":humanoid,"monstrosity":monstrosity,"ooze":ooze,"plant":plant,"undead":undead}
 
 #Essence Harvesting Variables: 
 monster_type = ""
@@ -51,7 +51,7 @@ class HarvestCalculator():
         self.calculation()
         
         
-
+    #Calculates the Type of Essence for the Spesific Monster CR
     def calc_essence(self):
         self.monster_CR = int(self.monster_CR)
         for k,v in self.essence.items():
@@ -70,8 +70,6 @@ class HarvestCalculator():
             elif self.monster_CR >= 25 and k == "Deific essence":
                 self.components[k] = v
                 return "Deific essence"
-            #else:
-            #   return None
             
              
     #Replaces input Essence with Key form Essence Dict   
@@ -93,69 +91,15 @@ class HarvestCalculator():
         return self.components
     
         
-    
-    
-    
     def typ_check(self):
-        if self.monster_type == "Aberation" or "aberation":
-            self.type_dict = aberation
-            return self.type_dict 
-        elif self.monster_type == "beast" or "Beast":
-            self.type_dict = beast
-            return self.type_dict  
-        elif self.monster_type == "celestial" or "Celestial":
-            self.type_dict = celestial
-            return self.type_dict  
-        elif self.monster_type == "construct" or "Celestial":
-            self.type_dict = construct
-            return self.type_dict  
-        elif self.monster_type == "dragon"or"Dragon":
-            self.type_dict = dragon
-            return self.type_dict     
-        elif self.monster_type == "elemental"or"Elemental":
-            self.type_dict = elemental
-            return self.type_dict 
-        elif self.monster_type == "fey"or"Fey":
-            self.type_dict = fey
-            return self.type_dict 
-        elif self.monster_type == "fiend"or"Fiend":
-            self.type_dict = fiend
-            return self.type_dict 
-        elif self.monster_type == "giant"or"Giant":
-            self.type_dict = giant
-            return self.type_dict 
-        elif self.monster_type == "humanoid"or"Humanoid":
-            self.type_dict = humanoid
-            return self.type_dict 
-        elif self.monster_type == "monstrosity"or"Monstrosity":
-            self.type_dict = monstrosity
-            return self.type_dict 
-        elif self.monster_type == "ooze"or"Ooze":
-            self.type_dict = ooze
-            return self.type_dict 
-        elif self.monster_type == "plant"or"Plant":
-            self.type_dict = plant
-            return self.type_dict 
-        elif self.monster_type == "undead"or"Undead":
-            self.type_dict = undead
-            return self.type_dict 
-        else:
-            return "No Type Found"
+        return type_selection[str(self.monster_type).lower()]
 
     def calculation(self):
         self.build_comp_dict()
-        self.DC = sum(self.components[item] for item in self.monster_components)
-        self.DC_calc = self.DC_calc + "+".join(str(self.components[item]) for item in self.monster_components)
-        self.comp_list = self.comp_list + ", ".join(self.monster_components).title()
+        self.DC         = sum(self.components[item] for item in self.monster_components)
+        self.DC_calc    = self.DC_calc + "+".join(str(self.components[item]) for item in self.monster_components)
+        self.comp_list  = self.comp_list + ", ".join(self.monster_components).title()
         
-        
-        
-        
-       # for i in range(0,len(self.monster_components)):
-          #  if self.monster_components[i] in self.components:
-               # self.DC += self.components[self.monster_components[i]]    
-                #self.comp_list = self.comp_list  + str(self.monster_components[i]).capitalize()+ " , "
-                #self.DC_calc = self.DC_calc + str(self.components[self.monster_components[i]]) + "+"
                 
         return print("\n" + "Monster Type : "+ str(self.monster_type).capitalize()+"\n" +"DC: " + str(self.DC) + "\n" + str(self.DC_calc)+"\n" + str(self.comp_list)+ "\n")
 
