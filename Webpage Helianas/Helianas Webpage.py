@@ -1,3 +1,6 @@
+from flask import Flask, render_template, request
+app = Flask(__name__)
+
 #Dicionarys for the unique monster typs
 essence = {"Frail essence":25,"Robust essence":30,"Potent essence":35,"Mythic essence":40,"Deific essence":50}
 aberation = {"antenna":5,"eye":5,"flesh":5,"phial of blood":5,"bone":10,"egg":10,"fat":10,"pouch of claws":10,"pouch of teeth":10,"heart":15,"phial of mucus":15,"liver":15,"stinger":15,"tentacle":15,"brain":20,"chitin":20,"hide":20,"main eye":20}
@@ -22,18 +25,36 @@ type_selection = {"aberation":aberation,"beast":beast,"celestial":celestial,"con
 monster_type = ""
 components = {}
 monster_CR = 0
-monster_components = ""
 
-#User Input
-def usr_input():
-        monster_type = input("Monster Type: ")
-        monster_CR = input("Monster CR: ")
-        monster_components = input("Monster Conponents: ")
-        monster_type = monster_type.replace("Type:","").lower()
-        monster_CR = monster_CR.replace("Monster CR: ","")
-        monster_components = monster_components.replace("Monster Conponents: ","").lower()
-       
-        return int(monster_CR),monster_type,monster_components
+@app.route('/')
+def index():
+    # Beispiel-Dictionary für das Dropdown-Menü
+    options = {"Aberation":aberation,"Beast":beast,"Celestial":celestial,"Construct":construct,"Dragon":dragon,"Elemental":elemental,"Fey":fey,"Fiend":fiend,"Giant":giant,"Humanoid":humanoid,"Monstrosity":monstrosity,"Ooze":ooze,"Plant":plant,"Undead":undead}
+    return render_template("index.html", options=options)
+
+@app.route('/calculate', methods=["POST"])
+def calculate():
+    # Abrufen der ausgewählten Option aus dem Dropdown-Menü
+    monster_type = str(request.form["dropdown"])
+    # Abrufen der Zahl aus der Eingabe-Fläche
+    monster_CR = int(request.form["number"])
+    # Abrufen des Texts aus der Eingabe-Fläche
+    monster_components = str(request.form["text"])
+    monster_components = monster_components.split(",")
+    
+    
+    
+    
+    # Beispiel-Funktion, die die übergebenen Parameter verarbeitet
+    result  = process_inputs(monster_CR,monster_type,monster_components)
+
+    return render_template("result.html", result=result)
+
+def process_inputs(monster_CR,monster_type, monster_components):
+    a = HarvestCalculator(monster_CR,monster_type, monster_components)
+    
+    
+    return a.calculation()
 
 
 class HarvestCalculator():
@@ -49,7 +70,7 @@ class HarvestCalculator():
         self.comp_list = "Component List: "
         self.DC = 0
         self.DC_calc = "DC Calculation: "
-        self.calculation()
+        
         
         
     #Calculates the Type of Essence for the Spesific Monster CR
@@ -75,7 +96,7 @@ class HarvestCalculator():
              
     #Replaces input Essence with Key form Essence Dict   
     def replace_essence (self):
-        self.monster_components = self.monster_components.split(",")
+        #self.monster_components = self.monster_components.split(",")
         for i in range(0,len(self.monster_components)):
             if self.monster_components[i] == "essence":
                 self.monster_components[i] = self.calc_essence()
@@ -103,11 +124,11 @@ class HarvestCalculator():
         self.comp_list  = self.comp_list + ", ".join(self.monster_components).title()
         
                 
-        return print("\n" + "Monster Type : "+ str(self.monster_type).capitalize()+"\n" +"DC: " + str(self.DC) + "\n" + str(self.DC_calc)+"\n" + str(self.comp_list)+ "\n")
-
+        return "\n" + "Monster Type : "+ str(self.monster_type).capitalize()+"\n" +"DC: " + str(self.DC) + "\n" + str(self.DC_calc)+"\n" + str(self.comp_list)+ "\n"
+    
 
 
 
 if __name__ == "__main__":
-    ls = usr_input()
-    monster = HarvestCalculator(ls[0],ls[1],ls[2])
+    app.run(debug=True)
+    calculate()

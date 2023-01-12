@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Result</title>
+</head>
+<body>
+  <div id="result">
+      {% if result %}
+        {{ result|replace('\n','<br>') }}
+      {% endif %}
+  </div>
+</body>
+</html>
