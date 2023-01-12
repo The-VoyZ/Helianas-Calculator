@@ -6,7 +6,13 @@
 <body>
   <div id="result">
       {% if result %}
-        {{ result|replace('\n','<br>') }}
+        {% for res in result%}
+            
+            {{res}}
+
+            <br>
+            
+        {% endfor%}
       {% endif %}
   </div>
 </body>

@@ -47,8 +47,8 @@ def calculate():
     
     # Beispiel-Funktion, die die übergebenen Parameter verarbeitet
     result  = process_inputs(monster_CR,monster_type,monster_components)
-
-    return render_template("result.html", result=result)
+    options = {"Aberation":aberation,"Beast":beast,"Celestial":celestial,"Construct":construct,"Dragon":dragon,"Elemental":elemental,"Fey":fey,"Fiend":fiend,"Giant":giant,"Humanoid":humanoid,"Monstrosity":monstrosity,"Ooze":ooze,"Plant":plant,"Undead":undead}
+    return render_template("index.html", result=result , options=options)
 
 def process_inputs(monster_CR,monster_type, monster_components):
     a = HarvestCalculator(monster_CR,monster_type, monster_components)
@@ -124,7 +124,7 @@ class HarvestCalculator():
         self.comp_list  = self.comp_list + ", ".join(self.monster_components).title()
         
                 
-        return "\n" + "Monster Type : "+ str(self.monster_type).capitalize()+"\n" +"DC: " + str(self.DC) + "\n" + str(self.DC_calc)+"\n" + str(self.comp_list)+ "\n"
+        return [ "Monster Type : "+ str(self.monster_type).capitalize(), "DC: " + str(self.DC), str(self.DC_calc), str(self.comp_list)]
     
 
 
