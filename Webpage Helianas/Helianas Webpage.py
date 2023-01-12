@@ -26,7 +26,7 @@ monster_type = ""
 components = {}
 monster_CR = 0
 
-@app.route('/')
+@app.route('/calculate')
 def index():
     # Beispiel-Dictionary für das Dropdown-Menü
     options = {"Aberation":aberation,"Beast":beast,"Celestial":celestial,"Construct":construct,"Dragon":dragon,"Elemental":elemental,"Fey":fey,"Fiend":fiend,"Giant":giant,"Humanoid":humanoid,"Monstrosity":monstrosity,"Ooze":ooze,"Plant":plant,"Undead":undead}
@@ -39,7 +39,7 @@ def calculate():
     # Abrufen der Zahl aus der Eingabe-Fläche
     monster_CR = int(request.form["number"])
     # Abrufen des Texts aus der Eingabe-Fläche
-    monster_components = str(request.form["text"])
+    monster_components = str(request.form["text"]).lower()
     monster_components = monster_components.split(",")
     
     
