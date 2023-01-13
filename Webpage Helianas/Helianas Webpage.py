@@ -26,13 +26,13 @@ monster_type = ""
 components = {}
 monster_CR = 0
 
-@app.route('/calculate')
+@app.route('/')
 def index():
     # Beispiel-Dictionary für das Dropdown-Menü
     options = {"Aberation":aberation,"Beast":beast,"Celestial":celestial,"Construct":construct,"Dragon":dragon,"Elemental":elemental,"Fey":fey,"Fiend":fiend,"Giant":giant,"Humanoid":humanoid,"Monstrosity":monstrosity,"Ooze":ooze,"Plant":plant,"Undead":undead}
     return render_template("index.html", options=options)
 
-@app.route('/calculate', methods=["POST"])
+@app.route('/', methods=["POST"])
 def calculate():
     # Abrufen der ausgewählten Option aus dem Dropdown-Menü
     monster_type = str(request.form["dropdown"])
@@ -96,7 +96,10 @@ class HarvestCalculator():
              
     #Replaces input Essence with Key form Essence Dict   
     def replace_essence (self):
+        
         #self.monster_components = self.monster_components.split(",")
+        
+        #self.monster_components = list(map(lambda x: x.replace('essence', self.calc_essence()), self.monster_components))
         for i in range(0,len(self.monster_components)):
             if self.monster_components[i] == "essence":
                 self.monster_components[i] = self.calc_essence()
@@ -130,5 +133,5 @@ class HarvestCalculator():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0",debug=True)
     calculate()
