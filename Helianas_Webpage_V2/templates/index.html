@@ -1,0 +1,57 @@
+<html>
+<head>
+  <title>Harvest Calculator</title>
+</head>
+<body>
+  <form method="post" action="{{ url_for('calculate') }}">
+    <label for="dropdown">Select Monster Type:</label>
+    <br>
+    <select name="dropdown" id="dropdown">
+      {% for key, value in options.items() %}
+        <option value="{{ key }}">{{ key }}</option>
+      {% endfor %}
+    </select>
+    <br>
+    <label for="number">Enter Monster CR:</label>
+    <br>
+    <input type="range" name = "number" min="0" max="50" value="25" id="slider" onchange="updateValue()">
+    <span id="sliderValue">25</span>
+    
+    <script>
+        var slider = document.getElementById("slider");
+        var value = document.getElementById("sliderValue");
+        slider.addEventListener("input", function() {
+        value.innerHTML = this.value;
+        });
+        function updateValue() {
+          var slider = document.getElementById("slider");
+          var value = document.getElementById("sliderValue");
+          value.innerHTML = slider.value;
+        }
+    </script>
+    <br>
+    <label for="text">Enter Components:</label>
+    <br>
+    <input type="text" name="text" id="text">
+    <br>
+    <br>
+    <input type="submit" value="Calculate">
+  </form>
+  <br>
+  <form>
+    <input type="submit" value="Reset" onclick="location.reload()">
+</form>
+<br>
+  <div id="result">
+    {% if result %}
+    {% for res in result%}
+        
+        {{res}}
+
+        <br>
+        
+    {% endfor%}
+  {% endif %}
+  </div>
+</body>
+</html>
