@@ -71,3 +71,5 @@ class HarvestCalculator():
         
                 
         return [ "Monster Type : "+ str(self.monster_type).capitalize(), "DC: " + str(self.DC), str(self.DC_calc), str(self.comp_list)]
+    
+    

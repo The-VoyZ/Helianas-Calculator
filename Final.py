@@ -18,6 +18,27 @@ undead = {"eye":5,"bone":5,"phial of congealed blood":5,"marrow":10,"pouch of te
 #Dropdown Menue for Type Selection
 type_selection = {"aberation":aberation,"beast":beast,"celestial":celestial,"construct":construct,"dragon":dragon,"elemental":elemental,"fey":fey,"fiend":fiend,"giant":giant,"humanoid":humanoid,"monstrosity":monstrosity,"ooze":ooze,"plant":plant,"undead":undead}
 
+
+#Region + Material Dictionary = Material Selection == Mundane Ingredients p102 Helianas Guide to Monster Hunting
+arctic = {"cotton":50,"flax":50,"silk":55,"spidersilk":60,"copper":35,"iron":35,"silver":40,"gold":50,"platinum":55,"adamantine":60,"mithral":60,"basic wood":50,"exotic wood":55,"xyxlwood":60}
+coast = {"cotton":20,"flax":20,"silk":50,"spidersilk":45,"copper":35,"iron":35,"silver":40,"gold":45,"platinum":50,"adamantine":55,"mithral":55,"basic wood":20,"exotic wood":30,"xyxlwood":40}
+desert = {"cotton":40,"flax":40,"silk":50,"spidersilk":55,"copper":15,"iron":15,"silver":25,"gold":30,"platinum":35,"adamantine":40,"mithral":40,"basic wood":40,"exotic wood":50,"xyxlwood":60}
+forest = {"cotton":15,"flax":15,"silk":20,"spidersilk":30,"copper":25,"iron":25,"silver":35,"gold":40,"platinum":45,"adamantine":50,"mithral":50,"basic wood":5,"exotic wood":15,"xyxlwood":30}
+grassland = {"cotton":5,"flax":5,"silk":20,"spidersilk":30,"copper":20,"iron":20,"silver":30,"gold":35,"platinum":40,"adamantine":45,"mithral":45,"basic wood":25,"exotic wood":30,"xyxlwood":50}
+hill = {"cotton":15,"flax":15,"silk":30,"spidersilk":40,"copper":5,"iron":5,"silver":15,"gold":20,"platinum":25,"adamantine":30,"mithral":30,"basic wood":25,"exotic wood":35,"xyxlwood":55}
+jungle = {"cotton":15,"flax":15,"silk":15,"spidersilk":25,"copper":25,"iron":25,"silver":35,"gold":45,"platinum":50,"adamantine":55,"mithral":55,"basic wood":5,"exotic wood":15,"xyxlwood":30}
+mountain = {"cotton":25,"flax":25,"silk":40,"spidersilk":50,"copper":5,"iron":5,"silver":15,"gold":20,"platinum":25,"adamantine":30,"mithral":30,"basic wood":30,"exotic wood":40,"xyxlwood":50}
+swamp = {"cotton":20,"flax":20,"silk":25,"spidersilk":45,"copper":35,"iron":35,"silver":45,"gold":50,"platinum":55,"adamantine":60,"mithral":60,"basic wood":25,"exotic wood":35,"xyxlwood":45}
+thelow = {"cotton":25,"flax":25,"silk":40,"spidersilk":45,"copper":10,"iron":10,"silver":20,"gold":25,"platinum":30,"adamantine":35,"mithral":35,"basic wood":40,"exotic wood":50,"xyxlwood":60}
+urban = {"cotton":40,"flax":40,"silk":50,"spidersilk":55,"copper":40,"iron":45,"silver":45,"gold":50,"platinum":55,"adamantine":60,"mithral":60,"basic wood":30,"exotic wood":40,"xyxlwood":50}
+
+#Drop Down Menue for MundaneItems
+region_selection = {"Arctic":arctic,"Coast":coast,"Desert":desert,"Forest":forest,"Grassland":grassland,"Hill":hill,"Jungle":jungle,"Mountain":mountain,"Swamp":swamp,"The Low":thelow,"Urban":urban}
+
+#Unrefined Materials weight
+unrefined_dict = {"cotton":0.05,"flax":0.05,"silk":0.05,"spidersilk":0.05,"copper":0.08,"iron":0.08,"silver":0.08,"gold":0.08,"platinum":0.08,"adamantine":0.04,"mithral":0.20,"basic wood":0.5,"exotic wood":0.5,"xyxlwood":0.5}
+
+
 #Essence Harvesting Variables: 
 monster_type = ""
 components = {}
@@ -25,7 +46,7 @@ monster_CR = 0
 monster_components = ""
 
 #User Input
-def usr_input():
+def monster_harvest_input():
         monster_type = input("Monster Type: ")
         monster_CR = input("Monster CR: ")
         monster_components = input("Monster Conponents: ")
@@ -106,8 +127,62 @@ class HarvestCalculator():
         return print("\n" + "Monster Type : "+ str(self.monster_type).capitalize()+"\n" +"DC: " + str(self.DC) + "\n" + str(self.DC_calc)+"\n" + str(self.comp_list)+ "\n")
 
 
+def mundane_materials_input():
+    region = input("Select Region:")
+    material = input("Input Material Type:")
+    return region,material
+    
 
+class MundaneIngredients():
+    
+    #Calculation for the Return Materials: Units found = 5x(1+Check -DC) 
+    #DC Calculation = Region + Material Type
+    
+    def __init__(self,region,material) -> None:
+        self.region = str(region).capitalize()
+        self.material = str(material).lower()
+        self.material_dict = {}
+        self.check_input = 0
+        self.material_units = 0
+        self.console_output()
+        
+    def material_DC(self):
+        self.material_dict = self.region_check()
+        if self.material in self.material_dict:
+            return self.material_dict[self.material]
+            
+    
+    
+    def region_check(self):
+        return region_selection[self.region]
+    
+    
+    def check_rolled(self):
+        self.check_input = input("What have you Rolled? ")
+        return int(self.check_input)
+    
+    
+    def material_calulation(self):
+        self.material_units = 5 *(1 + self.check_input - self.material_DC())
+        if self.material_units <= 0:
+            self.material_units = 0
+            return self.material_units 
+        else: 
+            return int(self.material_units)
+   
+    def unrefined_materials(self):
+        unrefined_units = unrefined_dict[self.material]*self.material_units
+        return unrefined_units
+    
+    
+    def console_output(self):
+        print ("\n" + "Selected Region: "+ self.region.capitalize() + "\n" + "Selected Material: " + self.material.capitalize() + "\n" + "Dc =" + str(self.material_DC()) + "\n")
+        self.check_input = self.check_rolled()
+        return print("\n" + "You gethered " + str(self.material_calulation()) + " Units of Copper " + self.material.capitalize() + " for a Total of " + str(self.unrefined_materials()) + " lbs")
+        
 
 if __name__ == "__main__":
-    ls = usr_input()
-    monster = HarvestCalculator(ls[0],ls[1],ls[2])
+    #ls = monster_harvest_input()
+    #monster = HarvestCalculator(ls[0],ls[1],ls[2])
+    materials = mundane_materials_input()
+    units = MundaneIngredients(materials[0],materials[1])

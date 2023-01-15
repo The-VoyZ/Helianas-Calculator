@@ -36,10 +36,7 @@ def process_inputs(monster_CR,monster_type, monster_components):
     
     return a.calculation()
 
-
-    
-
-
+ 
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0",debug=True)
