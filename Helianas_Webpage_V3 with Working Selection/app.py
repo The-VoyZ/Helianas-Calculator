@@ -12,11 +12,14 @@ def index():
     options = type_selection
     options2 ={}
     return render_template("index.html", options=options, options2 = options2)
-@app.route('/', methods=["POST"])
 
+
+@app.route('/', methods=["POST"])
 def dict_select():
     monster_type = str(request.form["dropdown"])
-    options = type_selection
+    selected_monster_type = {}
+    selected_monster_type[monster_type] = type_selection[monster_type]
+    options = selected_monster_type
     options2 = type_selection[monster_type]
     return render_template("index.html", options=options, options2 = options2)
 

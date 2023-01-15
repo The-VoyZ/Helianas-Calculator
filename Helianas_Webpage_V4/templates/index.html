@@ -1,9 +1,10 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>Harvest Calculator</title>
 </head>
 <body>
-  <form method="post" action="{{ url_for('calculate') }}">
+  <form method="POST">
     <label for="dropdown">Select Monster Type:</label>
     <br>
     <select name="dropdown" id="dropdown">
@@ -11,6 +12,10 @@
         <option value="{{ key }}">{{ key }}</option>
       {% endfor %}
     </select>
+    <br>
+    <br>
+    <input type="submit" value="Select Monster Type" onclick="dict_select">
+    <br>
     <br>
     <label for="number">Enter Monster CR:</label>
     <br>
@@ -28,9 +33,6 @@
           value.innerHTML = slider.value;
         }
     </script>
-    <br>
-    <input type="submit" value="Select Monster Type" onclick="dict_select">
-    <br>
     </form>
     <form>
     <label for="components">Select Component:</label>
@@ -40,13 +42,17 @@
       {% for key, value in options2.items() %}
         <option value="{{ key }}">{{ key }}</option>
       {% endfor %}
-      <!-- Add more options as needed -->
+
     </select>
     <div id="button-container"></div>
     <br>
     </form>
     <form>
-    <input type="submit" value="Calculate" id="calculate-button">
+    <input type="submit" value="Calculate" id="calculate-button" >
+    <br>
+  </form>
+    <form action="{{ url_for('calculate') }}" method="POST">
+      <input type="submit" value="Calculate" id="calculate-button" >
   </form>
   <br>
   <form>
@@ -82,9 +88,10 @@
   calculateButton.addEventListener("click", function() {
     var buttons = buttonContainer.getElementsByTagName("button");
     for (var i = 0; i < buttons.length; i++) {
-      resultString += buttons[i].innerHTML;
+      resultString += buttons[i].innerHTML + ",";
+      console.log(resultString)
     }
-    //You can use the resultString here as you wish 
+    document.getElementById("calculate-button").innerHTML = resultString
   });
   </script>
 </body>
