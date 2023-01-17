@@ -1,0 +1,182 @@
+<html>
+<head>
+  <style>
+    /* Center the page */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+  
+    /* Dark theme */
+    body {
+      background-color: #333;
+      color: #fff;
+    }
+    /* Style the form elements */
+    form {
+      background-color: #444;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    /* Style the select elements */
+    select {
+      background-color: #555;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px;
+      box-shadow: 0 0 5px #000;
+      margin-bottom: 10px;
+    }
+  
+    /* Style the buttons */
+    input[type="submit"] {
+      background-color: #666;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      margin-top: 10px;
+      box-shadow: 0 0 5px #000;
+      cursor: pointer;
+    }
+  
+    /* Style the slider */
+    input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      margin: 10px 0;
+    }
+    input[type="range"]:focus {
+      outline: none;
+    }
+    input[type="range"]::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 8px;
+      cursor: pointer;
+      animate: 0.2s;
+      box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+      background: #3071a9;
+      border-radius: 1.3px;
+      border: 0.2px solid #010101;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+      border: 1px solid #000000;
+      height: 36px;
+      width: 16px;
+      border-radius: 3px;
+      background: #ffffff;
+      cursor: pointer;
+      -webkit-appearance: none;
+      margin-top: -14px;
+    }
+    input[type="range"]:active::-webkit-slider-thumb {
+      background: #000000;
+    }
+    
+  </style>
+  
+  <title>Harvest Calculator</title>
+</head>
+<body>
+  <form method="post" action="{{ url_for('dict_select') }}">
+    <div>
+      <label for="dropdown">Select Monster Type:</label>
+      <br>
+      <select name="dropdown" id="dropdown">
+        {% for key, value in options.items() %}
+          <option value="{{ key }}">{{ key }}</option>
+        {% endfor %}
+      </select>
+      <br>
+      <br>
+      <input type="submit" value="Select Monster Type" onclick="dict_select">
+      <br>
+      <br>
+    </div>
+    <div>
+      <label for="components">Select Component:</label>
+      <br>
+      <select name="components" id="components">
+        <option value="default">Select a component</option>
+        {% for key, value in options2.items() %}
+          <option value="{{ key }}">{{ key }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div id="button-container"></div>
+    <br>
+    <form method="post" action="{{ url_for('calculate') }}">
+      <div>
+        <label for="number">Enter Monster CR:</label>
+        <br>
+        <input type="range" name = "number" min="0" max="50" value="25" id="slider" onchange="updateValue()"> 
+        <span id="sliderValue">25</span>
+        <script>
+            var slider = document.getElementById("slider");
+            var value = document.getElementById("sliderValue");
+            slider.addEventListener("input", function() {
+            value.innerHTML = this.value;
+            });
+            function updateValue() {
+              var slider = document.getElementById("slider");
+              var value = document.getElementById("sliderValue");
+              value.innerHTML = slider.value;
+            }
+        </script>
+      </div>
+      <div>
+        <input type="hidden" name = "monster_type" value="{{monster_type}}" id="monster_type">
+        <input type="hidden" name = "resultString" id="resultString">
+      </div>
+      <br>
+      <input type="submit" value="Calculate" id="calculate-button">
+    </form>
+  </form>
+  <br>
+  <form method="GET" action="/">
+    <input type="submit" value="Reset" onclick="location.reload()">
+  </form>
+  <br>
+  <div id="result">
+    {% if result %}
+      {% for res in result%}
+        {{res}}
+        <br>
+      {% endfor%}
+    {% endif %}
+  </div>
+  <script>
+    var select = document.getElementById("components");
+    var buttonContainer = document.getElementById("button-container");
+    select.addEventListener("change", function() {
+      if (this.value !== "default") {
+        var button = document.createElement("button");
+        button.innerHTML = this.value;
+        buttonContainer.appendChild(button);
+        button.addEventListener("click", function() {
+          buttonContainer.removeChild(this);
+        });
+        select.value = "default";
+      }
+    });
+    var calculateButton = document.getElementById("calculate-button");
+    var resultString = "";
+    calculateButton.addEventListener("click", function() {
+      var buttons = buttonContainer.getElementsByTagName("button");
+      for (var i = 0; i < buttons.length; i++) {
+        resultString += buttons[i].innerHTML + ",";
+      }
+      document.getElementById("resultString").value = resultString;
+    });
+  </script>
+  </body>
+  </html>
