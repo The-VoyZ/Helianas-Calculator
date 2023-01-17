@@ -128,6 +128,19 @@
   <title>Harvest Calculator</title>
 </head>
 <body>
+  <form style = "margin: 25px">
+    <label>
+      <h1>
+        How to use this Calculator
+      </h1>
+      First Select your Monster Type and Submit it.
+      <br>
+      Then you can Select your Components. If you want to remove a Component from your list just press the corresponding button. 
+      <br>
+      If you have Essence Selected you need the CR of the Monster to Calculate the Correct Essence. 
+      <br>
+      Then just press Calculate and you get your DC !
+  </form>
   <form method="post" action="{{ url_for('dict_select') }}" style = "margin: 25px">
     <div>
       <label for="dropdown">Select Monster Type:</label>
@@ -174,10 +187,12 @@
   </form>
   <br>
   <form method="GET" action="/" style = "margin: 25px">
+    <label for="submit">Reset All</label>
+    <br>
     <input type="submit" value="Reset" onclick="location.reload()">
   </form>
   <br>
-  <div id="result" style="display: table; width: 25%; border-collapse: collapse;">
+  <div id="result" style="display: table; width: 100%; border-collapse: collapse;">
     {% if result %}
       {% for res in result%}
         <div style="display: block; border: 1px solid #ddd; padding: 8px;">{{res}}</div>

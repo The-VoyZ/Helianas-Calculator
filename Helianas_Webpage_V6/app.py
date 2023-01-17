@@ -52,5 +52,5 @@ def process_inputs(monster_CR,monster_type, monster_components):
  
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0",debug=True)
-    calculate()
+    app.run(host="0.0.0.0",debug=False)
+    
