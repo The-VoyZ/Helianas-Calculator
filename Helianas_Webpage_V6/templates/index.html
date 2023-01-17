@@ -81,80 +81,9 @@
     input[type="range"]:active::-webkit-slider-thumb {
       background: #000000;
     }
-    
   </style>
-  
-  <title>Harvest Calculator</title>
-</head>
-<body>
-  <form method="post" action="{{ url_for('dict_select') }}">
-    <div>
-      <label for="dropdown">Select Monster Type:</label>
-      <br>
-      <select name="dropdown" id="dropdown">
-        {% for key, value in options.items() %}
-          <option value="{{ key }}">{{ key }}</option>
-        {% endfor %}
-      </select>
-      <br>
-      <br>
-      <input type="submit" value="Select Monster Type" onclick="dict_select">
-      <br>
-      <br>
-    </div>
-    <div>
-      <label for="components">Select Component:</label>
-      <br>
-      <select name="components" id="components">
-        <option value="default">Select a component</option>
-        {% for key, value in options2.items() %}
-          <option value="{{ key }}">{{ key }}</option>
-        {% endfor %}
-      </select>
-    </div>
-    <div id="button-container"></div>
-    <br>
-    <form method="post" action="{{ url_for('calculate') }}">
-      <div>
-        <label for="number">Enter Monster CR:</label>
-        <br>
-        <input type="range" name = "number" min="0" max="50" value="25" id="slider" onchange="updateValue()"> 
-        <span id="sliderValue">25</span>
-        <script>
-            var slider = document.getElementById("slider");
-            var value = document.getElementById("sliderValue");
-            slider.addEventListener("input", function() {
-            value.innerHTML = this.value;
-            });
-            function updateValue() {
-              var slider = document.getElementById("slider");
-              var value = document.getElementById("sliderValue");
-              value.innerHTML = slider.value;
-            }
-        </script>
-      </div>
-      <div>
-        <input type="hidden" name = "monster_type" value="{{monster_type}}" id="monster_type">
-        <input type="hidden" name = "resultString" id="resultString">
-      </div>
-      <br>
-      <input type="submit" value="Calculate" id="calculate-button">
-    </form>
-  </form>
-  <br>
-  <form method="GET" action="/">
-    <input type="submit" value="Reset" onclick="location.reload()">
-  </form>
-  <br>
-  <div id="result">
-    {% if result %}
-      {% for res in result%}
-        {{res}}
-        <br>
-      {% endfor%}
-    {% endif %}
-  </div>
   <script>
+    window.addEventListener('load', function () {
     var select = document.getElementById("components");
     var buttonContainer = document.getElementById("button-container");
     select.addEventListener("change", function() {
@@ -177,6 +106,84 @@
       }
       document.getElementById("resultString").value = resultString;
     });
+  })
   </script>
+  <script>
+    window.addEventListener('load', function () {
+      
+    
+    var slider = document.getElementById("slider");
+    var value = document.getElementById("sliderValue");
+    slider.addEventListener("input", function() {
+    value.innerHTML = this.value;
+    });
+    })
+    function updateValue() {
+      var slider = document.getElementById("slider");
+      var value = document.getElementById("sliderValue");
+      value.innerHTML = slider.value;
+    }
+</script>
+  
+  <title>Harvest Calculator</title>
+</head>
+<body>
+  <form method="post" action="{{ url_for('dict_select') }}">
+    <div>
+      <label for="dropdown">Select Monster Type:</label>
+      <br>
+      <br>
+      <select name="dropdown" id="dropdown">
+        {% for key, value in options.items() %}
+          <option value="{{ key }}">{{ key }}</option>
+        {% endfor %}
+      </select>
+      <br>
+      
+      <input type="submit" value="Select Monster Type" onclick="dict_select">
+      <br>
+      <br>
+    </div>
+    <div>
+      <label for="components">Select Component:</label>
+      <br>
+      <br>
+      <select name="components" id="components">
+        <option value="default">Select a component</option>
+        {% for key, value in options2.items() %}
+          <option value="{{ key }}">{{ key }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div id="button-container"></div>
+    <br>
+  </form>
+    <form method="post" action="{{ url_for('calculate') }}">
+      <div>
+        <label for="number">Enter Monster CR:</label>
+        <br>
+        <input type="range" name = "number" min="0" max="50" value="25" id="slider" onchange="updateValue()"> 
+        <span id="sliderValue">25</span>
+      </div>
+      
+        <input type="hidden" name = "monster_type" value="{{monster_type}}" id="monster_type">
+        <input type="hidden" name = "resultString" id="resultString">
+      
+      <br>
+      <input type="submit" value="Calculate" id="calculate-button">
+  </form>
+  <br>
+  <form method="GET" action="/">
+    <input type="submit" value="Reset" onclick="location.reload()">
+  </form>
+  <br>
+  <div id="result">
+    {% if result %}
+      {% for res in result%}
+        {{res}}
+        <br>
+      {% endfor%}
+    {% endif %}
+  </div>
   </body>
   </html>
