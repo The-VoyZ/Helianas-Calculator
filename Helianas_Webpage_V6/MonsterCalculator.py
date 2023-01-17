@@ -44,7 +44,7 @@ class HarvestCalculator():
         
         #self.monster_components = list(map(lambda x: x.replace('essence', self.calc_essence()), self.monster_components))
         for i in range(0,len(self.monster_components)):
-            if self.monster_components[i] == "essence":
+            if self.monster_components[i] == "Essence":
                 self.monster_components[i] = self.calc_essence()
 
     #Builds a new Dict from the User inputed Components for use in The Calculation

@@ -128,7 +128,7 @@
   <title>Harvest Calculator</title>
 </head>
 <body>
-  <form method="post" action="{{ url_for('dict_select') }}">
+  <form method="post" action="{{ url_for('dict_select') }}" style = "margin: 25px">
     <div>
       <label for="dropdown">Select Monster Type:</label>
       <br>
@@ -151,14 +151,14 @@
       <select name="components" id="components">
         <option value="default">Select a component</option>
         {% for key, value in options2.items() %}
-          <option value="{{ key }}">{{ key }}</option>
+          <option value="{{ key }}">{{ key }} DC: {{value}} </option>
         {% endfor %}
       </select>
     </div>
     <div id="button-container"></div>
     <br>
   </form>
-    <form method="post" action="{{ url_for('calculate') }}">
+    <form method="post" action="{{ url_for('calculate') }}" style = "margin: 25px" >
       <div>
         <label for="number">Enter Monster CR:</label>
         <br>
@@ -173,17 +173,16 @@
       <input type="submit" value="Calculate" id="calculate-button">
   </form>
   <br>
-  <form method="GET" action="/">
+  <form method="GET" action="/" style = "margin: 25px">
     <input type="submit" value="Reset" onclick="location.reload()">
   </form>
   <br>
-  <div id="result">
+  <div id="result" style="display: table; width: 25%; border-collapse: collapse;">
     {% if result %}
       {% for res in result%}
-        {{res}}
-        <br>
+        <div style="display: block; border: 1px solid #ddd; padding: 8px;">{{res}}</div>
       {% endfor%}
     {% endif %}
-  </div>
+</div>
   </body>
   </html>
