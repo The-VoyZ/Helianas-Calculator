@@ -12,8 +12,8 @@ giant = {'Flesh':5,'Nail':5,'Phial of Blood':5,'Bone':10,'Fat':10,'Tooth':10,'He
 humanoid = {'Eye':5,'Phial of Blood':5,'Bone':10,'Egg':10,'Pouch of Teeth':10,'Heart':15,'Liver':15,'Pouch of Feathers':15,'Pouch of Scales':15,'Brain':20,'Skin':20,'Essence':'Unknown'}
 monstrosity = {'Antenna':5,'Eye':5,'Flesh':5,'Phial of Blood':5,'Antler':10,'Beak':10,'Bone':10,'Egg':10,'Fat':10,'Fin':10,'Horn':10,'Pincer':10,'Pouch of Claws':10,'Pouch of Teeth':10,'Talon':10,'Tusk':10,'Heart':15,'Liver':15,'Poison Gland':15,'Pouch of Feathers':15,'Pouch of Scales':15,'Stinger':15,'Tentacle':15,'Chitin':20,'Pelt':20,'Essence':'Unknown'}
 ooze = {'Phial of Acid':5,'Phial of Mucus':10,'Vesicle':15,'Membrane':20,'Essence':'Unknown'}
-plant = {'Phial of Sap':5,'Tuber':5,'Bundle of Roots':10,'Phial of Wax':10,'Pouch of Hyphae':10,'Pouch of Leaves':10,'Poison Gland':15,'Pouch of Pollen':15,'Pouch of Spores':15,'Bark':20,'Fungal Membrane':20}
-undead = {'Eye':5,'Bone':5,'Phial of Congealed Blood':5,'Marrow':10,'Pouch of Teeth':10,'Rancid Fat':10,'Ethereal Ichor':15,'Undying Flesh':15,'Undying Heart':20}
+plant = {'Phial of Sap':5,'Tuber':5,'Bundle of Roots':10,'Phial of Wax':10,'Pouch of Hyphae':10,'Pouch of Leaves':10,'Poison Gland':15,'Pouch of Pollen':15,'Pouch of Spores':15,'Bark':20,'Fungal Membrane':20,'Essence':'Unknown'}
+undead = {'Eye':5,'Bone':5,'Phial of Congealed Blood':5,'Marrow':10,'Pouch of Teeth':10,'Rancid Fat':10,'Ethereal Ichor':15,'Undying Flesh':15,'Undying Heart':20,'Essence':'Unknown'}
 #Dropdown Menue for Type Selection#
 type_selection = {'Aberation':aberation,'Beast':beast,'Celestial':celestial,'Construct':construct,'Dragon':dragon,'Elemental':elemental,'Fey':fey,'Fiend':fiend,'Giant':giant,'Humanoid':humanoid,'Monstrosity':monstrosity,'Ooze':ooze,'Plant':plant,'Undead':undead}
 

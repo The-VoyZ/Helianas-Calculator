@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dark Theme</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
+    <title>Mundane Materials</title>
     <style>
         /* Center the page */
         body {
@@ -89,6 +90,40 @@
               border-radius: 5px; /* rounded corners */
               border: none; /* no border */
             }
+         .BackButton {
+                border: none;
+                background-color: transparent;
+                outline: none;
+                padding: 0px;
+                border-radius: 0px;
+                box-shadow: 0 0 0px #000;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            
+            }
+            #arrow-button {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                font-size: 20px;
+                color: #fff;
+                transition: color 0.2s;
+              }
+              
+              #arrow-button:hover {
+                color: #ff0000;
+              }
+              .Back{
+                border-radius: 0px;
+                box-shadow: 0 0 0px #000;
+                border: none;
+                background-color: transparent;
+                outline: none;
+                focus: none
+                padding: 0px;
+            }
+          
     </style>
     <script>
         window.addEventListener('load', function () {
@@ -108,11 +143,24 @@
     </script>
 </head>
 <body>
+    <form class = "BackButton" method="GET" action="/" style = "border: none; background-color: transparent outline: none;" >
+        <button class = "Back" id="arrow-button" action="/" method="GET" onclick = "location.reload()">
+          <i class="fas fa-arrow-left"> </i>
+        </button>
+      </form>
     <form style = "margin: 25px">
         <label>
           <h1>
             How to use this Calculator
           </h1>
+          <br>
+          Select the Region your in.
+          <br>
+          Select the Material you want to find or collect.
+          <br>
+          Roll your Check the DC is displayed behind your Material you have selected.
+          <br>
+          Press Calculate
       </form>
     <form method="post" action="{{ url_for('region_select') }}" style = "margin: 25px">
         <div>
@@ -152,11 +200,17 @@
             <input type="submit" value="Calculate" id="calculate-button">
         </div>
         </form>
+        <div>
+        <form method="POST" action="{{ url_for('mundane_main') }}" style = "margin: 25px">
+            <br>
+            <input type="submit" value="Reset" onclick="mundane_main()">
+          </form>
+        </div>
         <br>
         <div id="result" style="display: table; width: 100%; border-collapse: collapse;">
           {% if result %}
             {% for res in result%}
-              <div style="display: block; border: 1px solid #ddd; padding: 8px;">{{res}}</div>
+              <div style="display: block; border: 2px solid #ddd; padding: 8px;">{{res}}</div>
             {% endfor%}
           {% endif %}
       </div>  

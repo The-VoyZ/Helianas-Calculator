@@ -87,4 +87,4 @@ def process_inputs_material(region,material,dc):
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0",debug=True)
-    
+    #<form method="GET" action="/" style = "margin: 25px">
