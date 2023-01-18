@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dark Theme</title>
+    <style>
+        /* Center the page */
+        body {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+        }
+      
+        /* Dark theme */
+        body {
+          background-color: #333;
+          color: #fff;
+        }
+        /* Style the form elements */
+        form {
+          background-color: #444;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 0 10px #000;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+      
+        /* Style the select elements */
+        select {
+          background-color: #555;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          padding: 10px;
+          box-shadow: 0 0 5px #000;
+          margin-bottom: 10px;
+        }
+      
+        /* Style the buttons */
+        input[type="submit"] {
+          background-color: #666;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          padding: 10px 20px;
+          margin-top: 10px;
+          box-shadow: 0 0 5px #000;
+          cursor: pointer;
+        }
+        /* Style the slider */
+        input[type="range"] {
+          -webkit-appearance: none;
+          width: 100%;
+          margin: 10px 0;
+        }
+        input[type="range"]:focus {
+          outline: none;
+        }
+        input[type="range"]::-webkit-slider-runnable-track {
+          width: 100%;
+          height: 8px;
+          cursor: pointer;
+          animate: 0.2s;
+          box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+          background: #3071a9;
+          border-radius: 1.3px;
+          border: 0.2px solid #010101;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+          box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+          border: 1px solid #000000;
+          height: 36px;
+          width: 16px;
+          border-radius: 3px;
+          background: #ffffff;
+          cursor: pointer;
+          -webkit-appearance: none;
+          margin-top: -14px;
+        }
+        input[type="range"]:active::-webkit-slider-thumb {
+          background: #000000;
+        }
+            input[type="text"] {
+              background-color: #333333; /* dark background color */
+              color: #ffffff; /* white text color */
+              padding: 0.5em; /* some padding */
+              border-radius: 5px; /* rounded corners */
+              border: none; /* no border */
+            }
+    </style>
+    <script>
+        window.addEventListener('load', function () {
+          
+        
+        var slider = document.getElementById("slider");
+        var value = document.getElementById("sliderValue");
+        slider.addEventListener("input", function() {
+        value.innerHTML = this.value;
+        });
+        })
+        function updateValue() {
+          var slider = document.getElementById("slider");
+          var value = document.getElementById("sliderValue");
+          value.innerHTML = slider.value;
+        }
+    </script>
+</head>
+<body>
+    <form style = "margin: 25px">
+        <label>
+          <h1>
+            How to use this Calculator
+          </h1>
+      </form>
+    <form method="post" action="{{ url_for('region_select') }}" style = "margin: 25px">
+        <div>
+          <label for="dropdown">Select Region</label>
+          <br>
+          <br>
+          <select name="dropdown" id="dropdown">
+            {% for key, value in options.items() %}
+              <option value="{{ key }}">{{ key }}</option>
+            {% endfor %}
+          </select>
+          <br>
+          <input type="submit" value="Select Region" onclick="region_select">
+          <br>
+          <br>
+        </div>
+    </form>
+    <form method="post" action="{{ url_for('calculate_DC') }}" style = "margin: 25px" >
+        <div>
+          <label for="components">Select Material:</label>
+          <br>
+          <br>
+          <select name="material" id="material">
+            <option value="default">Select a Material</option>
+            {% for key, value in options2.items() %}
+              <option value="{{ key }}">{{ key }} DC: {{value}} </option>
+            {% endfor %}
+          </select>
+          <input type="hidden" name = "region" value="{{region}}" id="region">
+          <div>
+            <label for="number">Check Rolled:</label>
+            <br>
+            <br>
+            <input type="text" pattern="[0-9]*" inputmode="numeric" name = "number">
+          </div>
+            <br>
+            <input type="submit" value="Calculate" id="calculate-button">
+        </div>
+        </form>
+        <br>
+        <div id="result" style="display: table; width: 100%; border-collapse: collapse;">
+          {% if result %}
+            {% for res in result%}
+              <div style="display: block; border: 1px solid #ddd; padding: 8px;">{{res}}</div>
+            {% endfor%}
+          {% endif %}
+      </div>  
+</body>
+</html>

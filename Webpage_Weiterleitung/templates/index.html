@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dark Theme</title>
+    <style>
+        /*Dark background color*/
+        body {
+            background-color: #222222;
+        }
+
+        /*Button styling*/
+        .button {
+            background-color: #333333;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        /*Center button container on page*/
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /*Space buttons 200px apart*/
+        .button:first-child {
+            margin-right: 200px;
+        }
+    </style>
+    <script>
+        function calculateRedirect() {
+            window.location.href = "http://calculate.dicegoblins.de";
+        }
+    
+        function foundryRedirect() {
+            window.location.href = "http://foundry.dicegoblins.de";
+        }
+    </script>
+</head>
+<body>
+    <div class="button-container">
+        <button class="button" onclick="calculateRedirect()">Calculator</button>
+        <button class="button" onclick="foundryRedirect()" >FoundryVtt</button>
+    </div>
+</body>
+</html>

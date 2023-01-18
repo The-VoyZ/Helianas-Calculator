@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dark Theme</title>
+    <style>
+        /*Dark background color*/
+        body {
+            background-color: #222222;
+        }
+
+        /*Button styling*/
+        .button {
+            background-color: #333333;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        /*Center button container on page*/
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /*Space buttons 200px apart*/
+        .button:first-child {
+            margin-right: 0px;
+        }
+        /* Center the page */
+        body {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+        }
+      
+        /* Dark theme */
+        body {
+          background-color: #333;
+          color: #fff;
+        }
+        /* Style the form elements */
+        form {
+          background-color: #444;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 0 10px #000;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+      
+        /* Style the select elements */
+        select {
+          background-color: #555;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          padding: 10px;
+          box-shadow: 0 0 5px #000;
+          margin-bottom: 10px;
+        }
+      
+        /* Style the buttons */
+        input[type="submit"] {
+          background-color: #666;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          padding: 10px 20px;
+          margin-top: 10px;
+          box-shadow: 0 0 5px #000;
+          cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+    <form method="post" action="{{ url_for('calc_mainpage') }}"  style = "margin: 25px">
+        <button class="button">Monster Parts calculatorr</button>
+    </form>
+    <form  method="post" action="{{ url_for('mundane_main') }}" style = "margin: 25px">
+        <button class="button">Mundane Materials calculator</button>
+    </form>
+        
+    </div>
+</body>
+</html>
