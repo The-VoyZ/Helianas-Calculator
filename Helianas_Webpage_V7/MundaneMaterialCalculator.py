@@ -7,7 +7,7 @@ class MundaneIngredients():
     
     def __init__(self,region,material, dc) -> None:
         self.region = str(region)
-        self.material = str(material).lower()
+        self.material = str(material)
         self.material_dict = {}
         self.DC = dc
         self.material_units = 0

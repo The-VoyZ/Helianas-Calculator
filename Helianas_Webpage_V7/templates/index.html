@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dark Theme</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
+    <title>Calculator Main Page</title>
     <style>
         /*Dark background color*/
         body {
@@ -73,15 +74,70 @@
           box-shadow: 0 0 5px #000;
           cursor: pointer;
         }
+    #arrow-button {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 20px;
+      color: #fff;
+      transition: color 0.2s;
+    }
+    
+    #arrow-button:hover {
+      color: #ff0000;
+    }
+    button {
+      background-color: #666;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      margin-top: 10px;
+      margin-left: 10px;
+      box-shadow: 0 0 5px #000;
+      cursor: pointer;
+  }
+  .BackButton {
+    border: none;
+    background-color: transparent;
+    outline: none;
+    padding: 0px;
+    border-radius: 0px;
+    box-shadow: 0 0 0px #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  }
+  .Back{
+    border-radius: 0px;
+    box-shadow: 0 0 0px #000;
+    border: none;
+    background-color: transparent;
+    outline: none;
+    focus: none;
+    padding: 0px;
+  }
     </style>
+    <script>
+        function mainredirect() {
+            window.location.href = "http://dicegoblins.de";
+        }
+
+    </script>
 </head>
 <body>
+    <div>
+    <button class = "Back" id="arrow-button" onclick = "mainredirect()">
+        <i class="fas fa-arrow-left"> </i>
+      </button>
+    </div>
     <div class="button-container">
     <form method="post" action="{{ url_for('calc_mainpage') }}"  style = "margin: 25px">
-        <button class="button">Monster Parts calculatorr</button>
+        <button class="button">Monster Harvesting Calculator</button>
     </form>
     <form  method="post" action="{{ url_for('mundane_main') }}" style = "margin: 25px">
-        <button class="button">Mundane Materials calculator</button>
+        <button class="button">Mundane Materials Calculator</button>
     </form>
         
     </div>

@@ -14,6 +14,7 @@ monstrosity = {'Antenna':5,'Eye':5,'Flesh':5,'Phial of Blood':5,'Antler':10,'Bea
 ooze = {'Phial of Acid':5,'Phial of Mucus':10,'Vesicle':15,'Membrane':20,'Essence':'Unknown'}
 plant = {'Phial of Sap':5,'Tuber':5,'Bundle of Roots':10,'Phial of Wax':10,'Pouch of Hyphae':10,'Pouch of Leaves':10,'Poison Gland':15,'Pouch of Pollen':15,'Pouch of Spores':15,'Bark':20,'Fungal Membrane':20,'Essence':'Unknown'}
 undead = {'Eye':5,'Bone':5,'Phial of Congealed Blood':5,'Marrow':10,'Pouch of Teeth':10,'Rancid Fat':10,'Ethereal Ichor':15,'Undying Flesh':15,'Undying Heart':20,'Essence':'Unknown'}
+
 #Dropdown Menue for Type Selection#
 type_selection = {'Aberation':aberation,'Beast':beast,'Celestial':celestial,'Construct':construct,'Dragon':dragon,'Elemental':elemental,'Fey':fey,'Fiend':fiend,'Giant':giant,'Humanoid':humanoid,'Monstrosity':monstrosity,'Ooze':ooze,'Plant':plant,'Undead':undead}
 
@@ -21,20 +22,20 @@ type_selection = {'Aberation':aberation,'Beast':beast,'Celestial':celestial,'Con
 #Regular Materials Dictionarys
 
 #Region + Material Dictionary = Material Selection == Mundane Ingredients p102 Helianas Guide to Monster Hunting
-arctic = {'cotton':50,'flax':50,'silk':55,'spidersilk':60,'copper':35,'iron':35,'silver':40,'gold':50,'platinum':55,'adamantine':60,'mithral':60,'basic wood':50,'exotic wood':55,'xyxlwood':60}
-coast = {'cotton':20,'flax':20,'silk':50,'spidersilk':45,'copper':35,'iron':35,'silver':40,'gold':45,'platinum':50,'adamantine':55,'mithral':55,'basic wood':20,'exotic wood':30,'xyxlwood':40}
-desert = {'cotton':40,'flax':40,'silk':50,'spidersilk':55,'copper':15,'iron':15,'silver':25,'gold':30,'platinum':35,'adamantine':40,'mithral':40,'basic wood':40,'exotic wood':50,'xyxlwood':60}
-forest = {'cotton':15,'flax':15,'silk':20,'spidersilk':30,'copper':25,'iron':25,'silver':35,'gold':40,'platinum':45,'adamantine':50,'mithral':50,'basic wood':5,'exotic wood':15,'xyxlwood':30}
-grassland = {'cotton':5,'flax':5,'silk':20,'spidersilk':30,'copper':20,'iron':20,'silver':30,'gold':35,'platinum':40,'adamantine':45,'mithral':45,'basic wood':25,'exotic wood':30,'xyxlwood':50}
-hill = {'cotton':15,'flax':15,'silk':30,'spidersilk':40,'copper':5,'iron':5,'silver':15,'gold':20,'platinum':25,'adamantine':30,'mithral':30,'basic wood':25,'exotic wood':35,'xyxlwood':55}
-jungle = {'cotton':15,'flax':15,'silk':15,'spidersilk':25,'copper':25,'iron':25,'silver':35,'gold':45,'platinum':50,'adamantine':55,'mithral':55,'basic wood':5,'exotic wood':15,'xyxlwood':30}
-mountain = {'cotton':25,'flax':25,'silk':40,'spidersilk':50,'copper':5,'iron':5,'silver':15,'gold':20,'platinum':25,'adamantine':30,'mithral':30,'basic wood':30,'exotic wood':40,'xyxlwood':50}
-swamp = {'cotton':20,'flax':20,'silk':25,'spidersilk':45,'copper':35,'iron':35,'silver':45,'gold':50,'platinum':55,'adamantine':60,'mithral':60,'basic wood':25,'exotic wood':35,'xyxlwood':45}
-thelow = {'cotton':25,'flax':25,'silk':40,'spidersilk':45,'copper':10,'iron':10,'silver':20,'gold':25,'platinum':30,'adamantine':35,'mithral':35,'basic wood':40,'exotic wood':50,'xyxlwood':60}
-urban = {'cotton':40,'flax':40,'silk':50,'spidersilk':55,'copper':40,'iron':45,'silver':45,'gold':50,'platinum':55,'adamantine':60,'mithral':60,'basic wood':30,'exotic wood':40,'xyxlwood':50}
+arctic = {'Cotton':50,'Flax':50,'Silk':55,'Spidersilk':60,'Copper':35,'Iron':35,'Silver':40,'Gold':50,'Platinum':55,'Adamantine':60,'Mithral':60,'Basic Wood':50,'Exotic Wood':55,'Xyxlwood':60}
+coast = {'Cotton':20,'Flax':20,'Silk':50,'Spidersilk':45,'Copper':35,'Iron':35,'Silver':40,'Gold':45,'Platinum':50,'Adamantine':55,'Mithral':55,'Basic Wood':20,'Exotic Wood':30,'Xyxlwood':40}
+desert = {'Cotton':40,'Flax':40,'Silk':50,'Spidersilk':55,'Copper':15,'Iron':15,'Silver':25,'Gold':30,'Platinum':35,'Adamantine':40,'Mithral':40,'Basic Wood':40,'Exotic Wood':50,'Xyxlwood':60}
+forest = {'Cotton':15,'Flax':15,'Silk':20,'Spidersilk':30,'Copper':25,'Iron':25,'Silver':35,'Gold':40,'Platinum':45,'Adamantine':50,'Mithral':50,'Basic Wood':5,'Exotic Wood':15,'Xyxlwood':30}
+grassland = {'Cotton':5,'Flax':5,'Silk':20,'Spidersilk':30,'Copper':20,'Iron':20,'Silver':30,'Gold':35,'Platinum':40,'Adamantine':45,'Mithral':45,'Basic Wood':25,'Exotic Wood':30,'Xyxlwood':50}
+hill = {'Cotton':15,'Flax':15,'Silk':30,'Spidersilk':40,'Copper':5,'Iron':5,'Silver':15,'Gold':20,'Platinum':25,'Adamantine':30,'Mithral':30,'Basic Wood':25,'Exotic Wood':35,'Xyxlwood':55}
+jungle = {'Cotton':15,'Flax':15,'Silk':15,'Spidersilk':25,'Copper':25,'Iron':25,'Silver':35,'Gold':45,'Platinum':50,'Adamantine':55,'Mithral':55,'Basic Wood':5,'Exotic Wood':15,'Xyxlwood':30}
+mountain = {'Cotton':25,'Flax':25,'Silk':40,'Spidersilk':50,'Copper':5,'Iron':5,'Silver':15,'Gold':20,'Platinum':25,'Adamantine':30,'Mithral':30,'Basic Wood':30,'Exotic Wood':40,'Xyxlwood':50}
+swamp = {'Cotton':20,'Flax':20,'Silk':25,'Spidersilk':45,'Copper':35,'Iron':35,'Silver':45,'Gold':50,'Platinum':55,'Adamantine':60,'Mithral':60,'Basic Wood':25,'Exotic Wood':35,'Xyxlwood':45}
+thelow = {'Cotton':25,'Flax':25,'Silk':40,'Spidersilk':45,'Copper':10,'Iron':10,'Silver':20,'Gold':25,'Platinum':30,'Adamantine':35,'Mithral':35,'Basic Wood':40,'Exotic Wood':50,'Xyxlwood':60}
+urban = {'Cotton':40,'Flax':40,'Silk':50,'Spidersilk':55,'Copper':40,'Iron':45,'Silver':45,'Gold':50,'Platinum':55,'Adamantine':60,'Mithral':60,'Basic Wood':30,'Exotic Wood':40,'Xyxlwood':50}
 
 #Drop Down Menue for MundaneItems
 region_selection = {'Arctic':arctic,'Coast':coast,'Desert':desert,'Forest':forest,'Grassland':grassland,'Hill':hill,'Jungle':jungle,'Mountain':mountain,'Swamp':swamp,'The Low':thelow,'Urban':urban}
 
 #Unrefined Materials weight
-unrefined_dict = {'cotton':0.05,'flax':0.05,'silk':0.05,'spidersilk':0.05,'copper':0.08,'iron':0.08,'silver':0.08,'gold':0.08,'platinum':0.08,'adamantine':0.04,'mithral':0.20,'basic wood':0.5,'exotic wood':0.5,'xyxlwood':0.5}
+unrefined_dict = {'Cotton':0.05,'Flax':0.05,'Silk':0.05,'Spidersilk':0.05,'Copper':0.08,'Iron':0.08,'Silver':0.08,'Gold':0.08,'Platinum':0.08,'Adamantine':0.04,'Mithral':0.20,'Basic Wood':0.5,'Exotic Wood':0.5,'Xyxlwood':0.5}
